@@ -1,6 +1,8 @@
 #!/usr/bin/php
 <?php
 
+use App\Command\DeleteCompanyCommand;
+use App\Command\UpdateCompanyCommand;
 use Symfony\Component\Console\Application;
 use App\Command\AddCompanyCommand;
 
@@ -11,4 +13,6 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 $application = new Application();
 $application->add(new AddCompanyCommand());
+$application->add(new UpdateCompanyCommand());
+$application->add(new DeleteCompanyCommand());
 $application->run();
