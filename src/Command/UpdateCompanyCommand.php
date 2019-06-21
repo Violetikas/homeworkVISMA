@@ -49,8 +49,8 @@ class UpdateCompanyCommand extends Command
         }
 
         // Validate email.
-        if (array_key_exists('email', $updates) && !(new EmailValidator())->isValid($updates['email'])) {
-            $output->writeln('<error>Invalid email: '.$updates['email'].'</error>');
+        if (array_key_exists('email', $updates) && !(new EmailValidator($db))->isValid($updates['email'], $id)) {
+            $output->writeln('<error>Invalid or duplicate email: '.$updates['email'].'</error>');
 
             return 1;
         }

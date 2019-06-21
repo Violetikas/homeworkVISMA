@@ -28,13 +28,14 @@ class AddCompanyCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $db = new DatabaseAdapter();
+        $id = $input->getOption('id');
         $name = $input->getArgument('name');
         $email = $input->getArgument('email');
         $phone = $input->getArgument('phone');
 
         // Validate email.
-        if (!(new EmailValidator())->isValid($email)) {
-            $output->writeln('<error>Invalid email: ' . $email . '</error>');
+        if (!(new EmailValidator($db))->isValid($email, $id)) {
+            $output->writeln('<error>Invalid or duplicate email: ' . $email . '</error>');
 
             return 1;
         }
@@ -50,7 +51,7 @@ class AddCompanyCommand extends Command
             'insert into companies (id, name, registration_code, email, phone, comment)
 values (?, ?, ?, ?, ?, ?)',
             [
-                $input->getOption('id'),
+                $id,
                 $name,
                 $input->getArgument('registration_code'),
                 $email,

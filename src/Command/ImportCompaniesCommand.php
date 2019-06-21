@@ -88,9 +88,14 @@ class ImportCompaniesCommand extends Command
             // Read fields directly into variables for easier handling.
             [$id, $name, $registration_code, $email, $phone, $comment] = $row;
 
+            // Normalize ID type.
+            if (!$id) {
+                $id = null;
+            }
+
             // Validate email.
-            if (!(new EmailValidator())->isValid($email)) {
-                $output->writeln('<error>Line ' . $lineNo . ': Invalid email: ' . $email . '</error>');
+            if (!(new EmailValidator($db))->isValid($email, $id)) {
+                $output->writeln('<error>Line ' . $lineNo . ': Invalid or duplicate email: ' . $email . '</error>');
                 $hasErrors = true;
 
                 continue;
@@ -102,11 +107,6 @@ class ImportCompaniesCommand extends Command
                 $hasErrors = true;
 
                 continue;
-            }
-
-            // Normalize ID type.
-            if (!$id) {
-                $id = null;
             }
 
             try {
