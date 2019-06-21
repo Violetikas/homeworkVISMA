@@ -3,6 +3,7 @@
 
 use App\Command\CompanyListCommand;
 use App\Command\DeleteCompanyCommand;
+use App\Command\ImportCompaniesCommand;
 use App\Command\UpdateCompanyCommand;
 use Symfony\Component\Console\Application;
 use App\Command\AddCompanyCommand;
@@ -17,4 +18,5 @@ $application->add(new AddCompanyCommand());
 $application->add(new UpdateCompanyCommand());
 $application->add(new DeleteCompanyCommand());
 $application->add(new CompanyListCommand());
+$application->add(new ImportCompaniesCommand());
 $application->run();
