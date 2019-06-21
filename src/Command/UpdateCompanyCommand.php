@@ -79,5 +79,7 @@ class UpdateCompanyCommand extends Command
         }
 
         $output->writeln('Company <info>#' . $existing['id'] . ' ' . $existing['name'] . '</info> updated.');
+
+        return 0;
     }
 }

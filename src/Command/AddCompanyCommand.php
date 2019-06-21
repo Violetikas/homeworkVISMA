@@ -59,5 +59,7 @@ values (?, ?, ?, ?, ?, ?)',
             ]
         );
         $output->writeln('Company <info>' . $name . '</info> added with ID <info>' . $db->lastInsertId() . '</info>.');
+
+        return 0;
     }
 }
