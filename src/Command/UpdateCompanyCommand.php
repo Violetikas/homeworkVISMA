@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Database\DatabaseAdapter;
 use App\Validator\EmailValidator;
+use App\Validator\PhoneValidator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -50,6 +51,13 @@ class UpdateCompanyCommand extends Command
         // Validate email.
         if (array_key_exists('email', $updates) && !(new EmailValidator())->isValid($updates['email'])) {
             $output->writeln('<error>Invalid email: '.$updates['email'].'</error>');
+
+            return 1;
+        }
+
+        // Validate phone.
+        if (array_key_exists('phone', $updates) && !(new PhoneValidator())->isValid($updates['phone'])) {
+            $output->writeln('<error>Invalid phone: '.$updates['phone'].'</error>');
 
             return 1;
         }

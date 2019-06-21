@@ -6,7 +6,8 @@
         "php": ">=7.1",
         "ext-pdo": "*",
         "ext-pdo_sqlite": "*",
-        "symfony/console": "^4.3"
+        "symfony/console": "^4.3",
+        "giggsey/libphonenumber-for-php": "^8.10"
     },
     "autoload": {
         "psr-4": {
