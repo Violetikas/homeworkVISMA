@@ -1,0 +1,12 @@
+#!/usr/bin/php
+<?php
+
+use Symfony\Component\Console\Application;
+
+// Do not limit execution time as this is not a web request.
+set_time_limit(0);
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+$application = new Application();
+$application->run();

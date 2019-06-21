@@ -1,0 +1,16 @@
+{
+    "name": "violetikas/visma-company-register",
+    "description": "Company Register",
+    "type": "project",
+    "require": {
+        "php": ">=7.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "symfony/console": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
