@@ -2,6 +2,7 @@
 <?php
 
 use Symfony\Component\Console\Application;
+use App\Command\AddCompanyCommand;
 
 // Do not limit execution time as this is not a web request.
 set_time_limit(0);
@@ -9,4 +10,5 @@ set_time_limit(0);
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $application = new Application();
+$application->add(new AddCompanyCommand());
 $application->run();
