@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Database\DatabaseAdapter;
+use App\Validator\EmailValidator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,6 +28,15 @@ class AddCompanyCommand extends Command
     {
         $db = new DatabaseAdapter();
         $name = $input->getArgument('name');
+        $email = $input->getArgument('email');
+
+        // Validate email.
+        if (!(new EmailValidator())->isValid($email)) {
+            $output->writeln('<error>Invalid email: ' . $email . '</error>');
+
+            return 1;
+        }
+
         $db->executeQuery(
             'insert into companies (id, name, registration_code, email, phone, comment)
 values (?, ?, ?, ?, ?, ?)',
@@ -34,7 +44,7 @@ values (?, ?, ?, ?, ?, ?)',
                 $input->getOption('id'),
                 $name,
                 $input->getArgument('registration_code'),
-                $input->getArgument('email'),
+                $email,
                 $input->getArgument('phone'),
                 $input->getArgument('comment')
             ]

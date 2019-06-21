@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Database\DatabaseAdapter;
+use App\Validator\EmailValidator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,6 +45,13 @@ class UpdateCompanyCommand extends Command
             if ($value) {
                 $updates[$option] = $value;
             }
+        }
+
+        // Validate email.
+        if (array_key_exists('email', $updates) && !(new EmailValidator())->isValid($updates['email'])) {
+            $output->writeln('<error>Invalid email: '.$updates['email'].'</error>');
+
+            return 1;
         }
 
         // Only execute queries if there is anything to update.
